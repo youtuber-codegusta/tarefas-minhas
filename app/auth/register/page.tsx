@@ -12,7 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,  
+  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { RegisterSchema } from "@/schemas/register-schema";
@@ -37,7 +37,7 @@ const registerPage = () => {
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
-    
+
     startTransition(() => {
       register(values)
         .then((data) => {
@@ -46,15 +46,15 @@ const registerPage = () => {
         });
     });
   };
-  
-  return ( 
-    
-        <AuthWrapper
-        linkButtonLabel="Já tem uma conta?"
-        linkButton="/auth/login"
-        >
-            <Form {...form}>
-        <form 
+
+  return (
+
+    <AuthWrapper
+      linkButtonLabel="Já tem uma conta?"
+      linkButton="/auth/login"
+    >
+      <Form {...form}>
+        <form
           className="space-y-6"
           onSubmit={form.handleSubmit(onSubmit)}
         >
@@ -120,9 +120,9 @@ const registerPage = () => {
           </Button>
         </form>
       </Form>
-        </AuthWrapper>
-    
+    </AuthWrapper>
+
   );
 }
- 
+
 export default registerPage;

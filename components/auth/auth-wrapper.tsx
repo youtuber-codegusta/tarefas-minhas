@@ -19,7 +19,7 @@ const AuthWrapper = ({
         <div className="w-full flex items-center h-full pt-20 flex-col container relative">
 
             <div className="flex flex-col items-center space-y-2 text-center">
-                <Image src="/logo.svg" alt="logo" width={400} height={200} />
+                <Image src="/logo.svg" alt="logo" width={300} height={200} />
                 <Link
               className={buttonVariants({
                 variant: 'link',

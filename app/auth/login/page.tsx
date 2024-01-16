@@ -1,4 +1,5 @@
 'use client'
+import { login } from "@/actions/login";
 import AuthWrapper from "@/components/auth/auth-wrapper";
 import { FormError } from "@/components/form/form-error";
 import {  FormSuccess } from "@/components/form/form-sucess";
@@ -8,11 +9,18 @@ import { Input } from "@/components/ui/input";
 import { LoginSchema } from "@/schemas/login-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const LoginPage = () => {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+  const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
+    ? "Email already in use with different provider!"
+    : "";
+
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -31,8 +39,20 @@ const LoginPage = () => {
     setSuccess("");
     
     startTransition(() => {
-      
-    });
+      login(values)
+      .then((data) => {
+        if (data?.error) {
+          form.reset();
+          setError(data.error);
+        }
+
+        if (data?.success) {
+          form.reset();
+          setSuccess(data.success);
+        }
+      })
+      .catch(() => setError("Something went wrong"));
+  });
   };
   return (
     
