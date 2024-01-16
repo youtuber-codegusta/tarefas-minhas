@@ -98,7 +98,7 @@ const LoginPage = () => {
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="tarefas@gmail.com"
+                          placeholder="tarefas@exemplo.com"
                           type="email"
                         />
                       </FormControl>
